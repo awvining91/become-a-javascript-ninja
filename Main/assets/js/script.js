@@ -1,6 +1,7 @@
-
-
-
+//trying to set a timer
+var countDown  = document.querySelector("#start-button");
+var timeEl = document.querySelector(".large-font timer-count");
+var secondsLeft = 30
 
 
 
@@ -20,6 +21,44 @@ var loseCounter = 0;
 var isWin = false;
 var timer;
 var timerCount;
+//
+
+
+countDown.addEventListener("click", function setTime() {
+
+  secondsLeft--;
+  timeEl.textContent = secondsLeft + " seconds left until defeat";
+
+  if(secondsLeft === 0) {
+    // Stops execution of action at set interval
+    clearInterval(timerInterval);
+    
+  }
+
+}, 1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -46,7 +85,7 @@ function init() {
 // The startGame function is called when the start button is clicked
 function startGame() {
   isWin = false;
-  timerCount = 10;
+  timerCount = 30;
   // Prevents start button from being clicked when round is in progress
   startButton.disabled = true;
   renderBlanks()
@@ -129,10 +168,6 @@ function getlosses() {
   }
   lose.textContent = loseCounter;
 }
-
-
-
-
 
 
 
