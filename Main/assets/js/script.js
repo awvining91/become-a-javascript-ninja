@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+//old variables from mini project
 var wordBlank = document.querySelector(".word-blanks");
 var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
@@ -11,6 +20,15 @@ var loseCounter = 0;
 var isWin = false;
 var timer;
 var timerCount;
+
+
+
+
+
+
+
+
+//old stuff from mini project
 
 // Arrays used to create blanks and letters on screen
 var lettersInChosenWord = [];
