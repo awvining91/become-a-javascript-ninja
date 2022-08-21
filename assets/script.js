@@ -6,15 +6,15 @@ function promptMe2() {
 
     var questions = [
         {
-            prompt: "What color are apples?\n(a) Red/Green\n\(b) Purple\n(c) Orange",
+            prompt: "What HTML tag do you use to link your javascript file to your html file?\n(a) <script>\n\(b) <jscript>\n(c) <javascript>",
             answer: "a"
         },
         {
-            prompt: "What color are Bananas?\n(a) Teal\n(b) Magenta\n(c) Yellow",
+            prompt: "Who created Javascript?\n(a) David Draiman\n(b) Maynard Keenan\n(c) Brendan Eich",
             answer: "c"
         },
         {
-            prompt: "What color are strawberries?\n(a) Yellow\n\(b) Red\n(c) Blue",
+            prompt: "How do you comment in Javascript?\n(a) //\n\(b) <!--\n(c) --",
             answer: "a"
         }
     
@@ -37,8 +37,21 @@ function promptMe2() {
     }
     
         alert("You got "+ score + "/" + questions.length + "question(s) right!");
+        alert("Game Over Ninja!")
     //used this as reference for for loop for questionnaie https://www.youtube.com/watch?v=LQGTb112N_c
-    
 
 
 }
+
+document.querySelector('#initials').addEventListener('click', storeScore);
+
+    function storeScore(){
+
+        var highScore = String(window.prompt
+            ("Enter your ninja score!",""));
+        alert ("You picked: " + highScore + "!");
+
+
+
+
+    }
