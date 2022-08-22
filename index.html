@@ -22,11 +22,40 @@
               <button id="initials"> Enter score & initials</button>
 
             </div>
+
+          <style media="screen">
+              input, button {
+                padding: 7px;
+                height: 40px;
+              }
+
+              fieldset {
+
+                margin-bottom: 20px;
+               
+              }
+
+          </style>
+
+            <div>
+              <h2>Ninja Scores</h2>
+
+
+
+                <fieldset>
+                  <legend> Ninja Data </legend>
+                    <input id="inpKey" type="text" placeholder="Enter Key...">
+                    <input id ="inpValue" type="text" placeholder="Enter Value...">
+                    <button type="button" id="btnInsert">Insert Data</button>
+                </fieldset>
+                <fieldset>
+                  <legend>Local Storage</legend>
+                    <div id="lsOutput"></div>
+                </fieldset>
+
+            </div>
             
-
-
-
-
+          <!--Used this video as reference https://www.youtube.com/watch?v=k8yJCeuP6I8&list=LL&index=2-->
 
 
 
@@ -41,6 +70,36 @@
     
     <script src="assets/script.js"></script>
     </body>
+
+    <script type="text/javascript">
+        const inpKey = document.getElementById("inpKey");
+        const inValue = document.getElementById("inpValue");
+        const btnInsert = document.getElementById("btnInsert");
+        const lsOutput = document.getElementById("lsOutput");
+
+        btnInsert.onclick = function () {
+          const key = inpKey.value;
+          const value = inpValue.value;
+
+          
+
+          if (key && value) {
+            localStorage.setItem(key, value);
+            location.reload();
+
+          }
+        };
+
+        for (let i = 0; i < localStorage.length; i++){
+          const key = localStorage.key(i);
+          const value = localStorage.getItem(key);
+
+          lsOutput.innerHTML += '${key}: ${value}<br />';
+
+        }
+
+
+    </script>
 
 
 
