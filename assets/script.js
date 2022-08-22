@@ -36,22 +36,31 @@ function promptMe2() {
     
     }
     
-        alert("You got "+ score + "/" + questions.length + "question(s) right!");
-        alert("Game Over Ninja!")
+        alert("You got "+ score + "/" + questions.length + " question(s) right!");
+        alert("Game Over Ninja!");
+        alert("You can now add your intials and score in the ninja hall of rememberance!");
+        alert("Click on the 'Enter score & initials' button!");
     //used this as reference for for loop for questionnaie https://www.youtube.com/watch?v=LQGTb112N_c
 
 
 }
 
-document.querySelector('#initials').addEventListener('click', storeScore);
+document.querySelector('#initials').addEventListener('click', storeScoreInitials);
 
-    function storeScore(){
+function storeScoreInitials(){
 
         var highScore = String(window.prompt
             ("Enter your ninja score!",""));
         alert ("You picked: " + highScore + "!");
 
+        var yourInitials = String(window.prompt
+           ("Enter your ninja initials!",""));
+        alert ("You picked: " + yourInitials + "!");
 
+        var initialsPlusScore = yourInitials.concat(' ',highScore);
+        alert ("Thanks! Here is today's top ninja: " + initialsPlusScore + "!");
+        
+        
 
 
     }
