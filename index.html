@@ -17,11 +17,12 @@
               <button id="generate">Start</button>
             </div>
 
-
+            <!--
             <div class="initial-box">
               <button id="initials"> Enter score & initials</button>
 
             </div>
+            -->
 
           <style media="screen">
               input, button {
@@ -38,24 +39,24 @@
           </style>
 
             <div>
-              <h2>Ninja Scores</h2>
+              <h2>Ninja Scores🥷</h2>
 
 
 
                 <fieldset>
-                  <legend> Ninja Data </legend>
-                    <input id="inpKey" type="text" placeholder="Enter Key...">
-                    <input id ="inpValue" type="text" placeholder="Enter Value...">
-                    <button type="button" id="btnInsert">Insert Data</button>
+                  <legend> Enter Ninja name and score below! </legend>
+                    <input id="inpKey" type="text" placeholder="Enter ninja name...">
+                    <input id ="inpValue" type="text" placeholder="Enter ninja score...">
+                    <button type="button" id="btnInsert">Insert Ninja Data</button>
                 </fieldset>
                 <fieldset>
-                  <legend>Local Storage</legend>
+                  <legend>Ninja Javascript Legends 🥷🥷</legend>
                     <div id="lsOutput"></div>
                 </fieldset>
 
             </div>
             
-          <!--Used this video as reference https://www.youtube.com/watch?v=k8yJCeuP6I8&list=LL&index=2-->
+          <!--Used this video as reference on local storage https://www.youtube.com/watch?v=k8yJCeuP6I8&list=LL&index=2-->
 
 
 
@@ -71,6 +72,7 @@
     <script src="assets/script.js"></script>
     </body>
 
+<!--This is the high score and name local storage section-->
     <script type="text/javascript">
         const inpKey = document.getElementById("inpKey");
         const inValue = document.getElementById("inpValue");
@@ -94,10 +96,10 @@
           const key = localStorage.key(i);
           const value = localStorage.getItem(key);
 
-          lsOutput.innerHTML += '${key}: ${value}<br />';
+          lsOutput.innerHTML += `${key}: ${value}<br />`;
 
         }
-
+        //I used this video for reference on local storage: https://www.youtube.com/watch?v=k8yJCeuP6I8&list=LL&index=2
 
     </script>
 

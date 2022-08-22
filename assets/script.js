@@ -38,8 +38,8 @@ function promptMe2() {
     
         alert("You got "+ score + "/" + questions.length + " question(s) right!");
         alert("Game Over Ninja!");
-        alert("You can now add your intials and score in the ninja hall of rememberance!");
-        alert("Click on the 'Enter score & initials' button!");
+        alert("You can now add your name and score into the Ninja Hall of Remembrance!");
+       
     //used this as reference for for loop for questionnaie https://www.youtube.com/watch?v=LQGTb112N_c
 
 
