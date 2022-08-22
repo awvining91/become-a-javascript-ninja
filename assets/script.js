@@ -13,6 +13,10 @@ function updateTimer(){
  
 }
 
+
+
+
+
 function endGame () {
     
     if (setInterval=== 0);
@@ -23,6 +27,9 @@ function endGame () {
 
 endGame ();
 //For help on the timer countdown I watched this video: https://www.youtube.com/watch?v=IOlnFbVLE8s&list=WL&index=4
+
+
+
 
 document.querySelector('#generate').addEventListener('click', promptMe2);
 //Note: The prompts freezes the browser, making it impossible for the timer to continue counting down :(
