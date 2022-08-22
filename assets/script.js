@@ -1,7 +1,31 @@
+const startTiming = .5;
+let time = startTiming * 60;
 
+const count = document.getElementById("countdownTimer");
+setInterval(updateTimer, 1000);
+function updateTimer(){
+    const minutes = Math.floor(time/60);
+    let seconds = time % 60;
+
+    seconds = seconds <10 ? '0' + seconds : seconds;
+    count.innerHTML = `${minutes}:${seconds}`
+    time--
+ 
+}
+
+function endGame () {
+    
+    if (setInterval=== 0);
+    windows.prompt("Time ran out! Game over ninja!");
+    
+
+}
+
+endGame ();
+//For help on the timer countdown I watched this video: https://www.youtube.com/watch?v=IOlnFbVLE8s&list=WL&index=4
 
 document.querySelector('#generate').addEventListener('click', promptMe2);
-
+//Note: The prompts freezes the browser, making it impossible for the timer to continue counting down :(
 function promptMe2() {
 
     var questions = [
@@ -64,3 +88,5 @@ function storeScoreInitials(){
 
 
     }
+
+   
