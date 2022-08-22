@@ -1,99 +1,149 @@
-const startTiming = .5;
-let time = startTiming * 60;
+window.confirm("Ready to start the Ninja Quiz?")
 
-const count = document.getElementById("countdownTimer");
-setInterval(updateTimer, 1000);
-function updateTimer(){
-    const minutes = Math.floor(time/60);
-    let seconds = time % 60;
 
-    seconds = seconds <10 ? '0' + seconds : seconds;
-    count.innerHTML = `${minutes}:${seconds}`
-    time--
- 
+function Quiz(questions) {
+    this.score = 0;
+    this.questions = questions;
+    this.questionIndex = 0;
 }
 
-
-
-
-
-function endGame () {
-    
-    if (setInterval=== 0);
-    windows.prompt("Time ran out! Game over ninja!");
-    
-
+Quiz.prototype.getQuestionIndex = function() {
+    return this.questions[this.questionIndex];
 }
 
-endGame ();
-//For help on the timer countdown I watched this video: https://www.youtube.com/watch?v=IOlnFbVLE8s&list=WL&index=4
-
-
-
-
-document.querySelector('#generate').addEventListener('click', promptMe2);
-//Note: The prompts freezes the browser, making it impossible for the timer to continue counting down :(
-function promptMe2() {
-
-    var questions = [
-        {
-            prompt: "What HTML tag do you use to link your javascript file to your html file?\n(a) <script>\n\(b) <jscript>\n(c) <javascript>",
-            answer: "a"
-        },
-        {
-            prompt: "Who created Javascript?\n(a) David Draiman\n(b) Maynard Keenan\n(c) Brendan Eich",
-            answer: "c"
-        },
-        {
-            prompt: "How do you comment in Javascript?\n(a) //\n\(b) <!--\n(c) --",
-            answer: "a"
-        }
-    
-    
-    ];
-    
-        var score = 0;
-    
-        //used this video as reference for questionnaire section https://youtu.be/LQGTb112N_c
-    
-        for(var i=0; i < questions.length; i++){
-        var response = window.prompt(questions[i].prompt);
-        if(response == questions[i].answer){
-            score++;
-            alert("Correct!");
-        } else {
-            alert("WRONG! Time deducted!");
-        }
-    
-    }
-    
-        alert("You got "+ score + "/" + questions.length + " question(s) right!");
-        alert("Game Over Ninja!");
-        alert("You can now add your name and score into the Ninja Hall of Remembrance!");
-       
-    //used this as reference for for loop for questionnaie https://www.youtube.com/watch?v=LQGTb112N_c
-
-
-}
-
-document.querySelector('#initials').addEventListener('click', storeScoreInitials);
-
-function storeScoreInitials(){
-
-        var highScore = String(window.prompt
-            ("Enter your ninja score!",""));
-        alert ("You picked: " + highScore + "!");
-
-        var yourInitials = String(window.prompt
-           ("Enter your ninja initials!",""));
-        alert ("You picked: " + yourInitials + "!");
-
-        var initialsPlusScore = yourInitials.concat(' ',highScore);
-        alert ("Thanks! Here is today's top ninja: " + initialsPlusScore + "!");
-        
-        
-
-
+Quiz.prototype.guess = function(answer) {
+    if(this.getQuestionIndex().isCorrectAnswer(answer)) {
+        this.score++;
     }
 
-   
+    this.questionIndex++;
+}
+
+Quiz.prototype.isEnded = function() {
+    return this.questionIndex === this.questions.length;
+}
+
+
+function Question(text, choices, answer) {
+    this.text = text;
+    this.choices = choices;
+    this.answer = answer;
+}
+
+Question.prototype.isCorrectAnswer = function(choice) {
+    return this.answer === choice;
+}
+
+
+// Displaying the question
+function displayQuestion() {
+    if(quiz.isEnded()) {
+        showScores();
+    }
+    else {
+        // show question
+        let questionElement = document.getElementById("question");
+        questionElement.innerHTML = quiz.getQuestionIndex().text;
+
+        // show options
+        let choices = quiz.getQuestionIndex().choices;
+        for(let i = 0; i < choices.length; i++) {
+            let choiceElement = document.getElementById("choice" + i);
+            choiceElement.innerHTML = choices[i];
+            guess("btn" + i, choices[i]);
+        }
+
+        showProgress();
+    }
+};
+
+function guess(id, guess) {
+    let button = document.getElementById(id);
+    button.onclick = function() {
+        quiz.guess(guess);
+        displayQuestion();
+    }
+};
+
+
+function showProgress() {
+    let currentQuestionNumber = quiz.questionIndex + 1;
+    let ProgressElement = document.getElementById("progress");
+    ProgressElement.innerHTML = 
+    `Question ${currentQuestionNumber} of ${quiz.questions.length}`;
+};
+
+function showScores() {
+    let quizEndHTML = 
+    `
+    <h1>Quiz Completed</h1>
+    <h2 id='score'> Your scored: ${quiz.score} of ${quiz.questions.length}</h2>
+    <div class="quiz-repeat">
+        <a href="index.html">Take Quiz Again</a>
+    </div>
+    `;
+    let quizElement = document.getElementById("quiz");
+    quizElement.innerHTML = quizEndHTML;
+};
+
+// create questions here
+let questions = [
+    new Question(
+        "Hyper Text Markup Language Stands For?", 
+        ["JQuery", "XHTML","CSS", "HTML"], "HTML"
+    ),
+    new Question(
+        "Cascading Style sheet stands for?", 
+        ["HTML", "JQuery", "CSS", "XML"], "CSS"
+    ),
+    new Question(
+        "Which is a JavaScript Framework?", 
+        ["React", "Laravel","Django", "Sass"], "React"
+        ),
+    new Question(
+        "Which is a backend language?", 
+        ["PHP", "HTML", "React", "All"], "PHP"
+        ),
+    new Question(
+        "Which is best for Artificial intelligence?", 
+        ["React", "Laravel","Python", "Sass"], "Python"
+        )
+];
+
+// Loop through the array and get the answers
+// questions.forEach((answer) => {
+//     console.log(answer.choice);
+//     let quizAnswers = document.getElementById("quiz-answers");
+//     // quizAnswers.innerHTML = questions.text;
+// })
+
+
+// create quiz
+let quiz = new Quiz(questions);
+
+// display quiz
+displayQuestion();
+
+// Add A CountDown for the Quiz
+let time = .5;
+let quizTimeInMinutes = time * 60 * 60;
+let quizTime = quizTimeInMinutes / 60;
+
+let counting = document.getElementById("count-down");
+
+function startCountdown(){
+    let quizTimer = setInterval(function(){
+    if(quizTime <= 0) {
+        clearInterval(quizTimer);
+        showScores();
+        window.alert("Time's up, you lost ninja!")
+    } else {
+        quizTime--;
+        let sec = Math.floor(quizTime % 60);
+        let min = Math.floor(quizTime / 60) % 60;
+        counting.innerHTML = `TIME: ${min} : ${sec}`;   
+    }
+},1000);
+}
+
+startCountdown();
