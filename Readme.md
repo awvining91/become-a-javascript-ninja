@@ -18,8 +18,11 @@ I learned a lot about web APIs troubleshooting trying out different things to se
 
 This week is third party APIs so I will continue to learn cool things like jQuery and Bootstrap and can hopefully start on the next challenge soon.
 
+![image](https://user-images.githubusercontent.com/51838530/186540113-8f82baa8-3f76-4791-8e62-d5df4cb2ced0.png)
+
 
 ## Deployment Link
+https://awvining91.github.io/become-a-javascript-ninja/
 
 
 
