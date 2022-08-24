@@ -1,6 +1,6 @@
 window.confirm("Ready to start the Ninja Quiz?")
 
-
+//this part confuses me
 function Quiz(questions) {
     this.score = 0;
     this.questions = questions;
@@ -33,7 +33,7 @@ function Question(text, choices, answer) {
 Question.prototype.isCorrectAnswer = function(choice) {
     return this.answer === choice;
 }
-
+//
 
 // Displaying the question
 function displayQuestion() {
