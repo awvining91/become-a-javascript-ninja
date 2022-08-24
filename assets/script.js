@@ -1,17 +1,17 @@
 window.confirm("Ready to start the Ninja Quiz?")
 
 //this part confuses me
-function Quiz(questions) {
+function Test(questions) {
     this.score = 0;
     this.questions = questions;
     this.questionIndex = 0;
 }
 
-Quiz.prototype.getQuestionIndex = function() {
+Test.prototype.getQuestionIndex = function() {
     return this.questions[this.questionIndex];
 }
 
-Quiz.prototype.guess = function(answer) {
+Test.prototype.guess = function(answer) {
     if(this.getQuestionIndex().isCorrectAnswer(answer)) {
         this.score++;
     }
@@ -19,7 +19,7 @@ Quiz.prototype.guess = function(answer) {
     this.questionIndex++;
 }
 
-Quiz.prototype.isEnded = function() {
+Test.prototype.isEnded = function() {
     return this.questionIndex === this.questions.length;
 }
 
@@ -89,24 +89,24 @@ function showScores() {
 // create questions here
 let questions = [
     new Question(
-        "Hyper Text Markup Language Stands For?", 
-        ["JQuery", "XHTML","CSS", "HTML"], "HTML"
+        "Who created JavaScript?", 
+        ["Maynard Keenan", "Dave Dramain","Brendan Eich", "Adam Jones"], "Brendan Eich"
     ),
     new Question(
-        "Cascading Style sheet stands for?", 
-        ["HTML", "JQuery", "CSS", "XML"], "CSS"
+        "What is jQuery?", 
+        ["API", "JSON", "PHP", "A cool rapper"], "API"
     ),
     new Question(
-        "Which is a JavaScript Framework?", 
-        ["React", "Laravel","Django", "Sass"], "React"
+        "Where is JavaScript used?", 
+        ["AI tools", "robotics","websites", "cryptocurrencies"], "websites"
         ),
     new Question(
-        "Which is a backend language?", 
-        ["PHP", "HTML", "React", "All"], "PHP"
+        "What type of language is Javascript?", 
+        ["up-stack", "no-stack", "side-end", "full-stack"], "full-stack"
         ),
     new Question(
-        "Which is best for Artificial intelligence?", 
-        ["React", "Laravel","Python", "Sass"], "Python"
+        "What language is frequently used with JavaScript?", 
+        ["CXB", "CSS","CFF", "CSB"], "CSS"
         )
 ];
 
@@ -119,7 +119,7 @@ let questions = [
 
 
 // create quiz
-let quiz = new Quiz(questions);
+let quiz = new Test(questions);
 
 // display quiz
 displayQuestion();
@@ -131,7 +131,7 @@ let quizTime = quizTimeInMinutes / 60;
 
 let counting = document.getElementById("count-down");
 
-function startCountdown(){
+function beginTimer(){
     let quizTimer = setInterval(function(){
     if(quizTime <= 0) {
         clearInterval(quizTimer);
@@ -146,4 +146,4 @@ function startCountdown(){
 },1000);
 }
 
-startCountdown();
+beginTimer();
