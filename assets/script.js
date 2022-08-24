@@ -1,93 +1,41 @@
+//Hello and welcome to my humble ninja javascript quiz! I hope you like it! :D
+
 window.confirm("Ready to start the Ninja Quiz?")
 
-//this part confuses me
-function Test(questions) {
-    this.score = 0;
-    this.questions = questions;
-    this.questionIndex = 0;
-}
 
-Test.prototype.getQuestionIndex = function() {
-    return this.questions[this.questionIndex];
-}
-
-Test.prototype.guess = function(answer) {
-    if(this.getQuestionIndex().isCorrectAnswer(answer)) {
-        this.score++;
-    }
-
-    this.questionIndex++;
-}
-
-Test.prototype.isEnded = function() {
-    return this.questionIndex === this.questions.length;
-}
+//var ninja = 0;
+//var superSet {x,y};
 
 
-function Question(text, choices, answer) {
-    this.text = text;
-    this.choices = choices;
-    this.answer = answer;
-}
+// Here is the timer for the questionnaire
+let clock = .5;
+let ninjaMinute = clock * 60 * 60;
+let testTotalTime = ninjaMinute / 60;
 
-Question.prototype.isCorrectAnswer = function(choice) {
-    return this.answer === choice;
-}
-//
+let ninjaCount = document.getElementById("timer-box");
 
-// Displaying the question
-function displayQuestion() {
-    if(quiz.isEnded()) {
+function ninjaClock(){
+    let ninjaCountDown = setInterval(function(){
+    if(testTotalTime <= 0) {
+        clearInterval(ninjaCountDown);
         showScores();
+        window.alert("Time's up, you lost ninja!")
+    } else {
+        testTotalTime--;
+        let second = Math.floor(testTotalTime % 60);
+        let minute = Math.floor(testTotalTime / 60) % 60;
+        ninjaCount.innerHTML = `TIME: ${minute} : ${second}`;   
     }
-    else {
-        // show question
-        let questionElement = document.getElementById("question");
-        questionElement.innerHTML = quiz.getQuestionIndex().text;
+},1000);
+}
 
-        // show options
-        let choices = quiz.getQuestionIndex().choices;
-        for(let i = 0; i < choices.length; i++) {
-            let choiceElement = document.getElementById("choice" + i);
-            choiceElement.innerHTML = choices[i];
-            guess("btn" + i, choices[i]);
-        }
+ninjaClock();
 
-        showProgress();
-    }
-};
-
-function guess(id, guess) {
-    let button = document.getElementById(id);
-    button.onclick = function() {
-        quiz.guess(guess);
-        displayQuestion();
-    }
-};
+// for the timer I got conceptual help from this video https://www.youtube.com/watch?v=bGQ9sIHZdlo all credit to original creator
 
 
-function showProgress() {
-    let currentQuestionNumber = quiz.questionIndex + 1;
-    let ProgressElement = document.getElementById("progress");
-    ProgressElement.innerHTML = 
-    `Question ${currentQuestionNumber} of ${quiz.questions.length}`;
-};
-
-function showScores() {
-    let quizEndHTML = 
-    `
-    <h1>Quiz Completed</h1>
-    <h2 id='score'> Your scored: ${quiz.score} of ${quiz.questions.length}</h2>
-    <div class="quiz-repeat">
-        <a href="index.html">Take Quiz Again</a>
-    </div>
-    `;
-    let quizElement = document.getElementById("quiz");
-    quizElement.innerHTML = quizEndHTML;
-};
-
-// create questions here
-let questions = [
+//These are the javascript quiz questions
+let knowledgeTest = [
     new Question(
         "Who created JavaScript?", 
         ["Maynard Keenan", "Dave Dramain","Brendan Eich", "Adam Jones"], "Brendan Eich"
@@ -110,40 +58,109 @@ let questions = [
         )
 ];
 
-// Loop through the array and get the answers
-// questions.forEach((answer) => {
-//     console.log(answer.choice);
-//     let quizAnswers = document.getElementById("quiz-answers");
-//     // quizAnswers.innerHTML = questions.text;
-// })
 
 
-// create quiz
-let quiz = new Test(questions);
 
-// display quiz
-displayQuestion();
 
-// Add A CountDown for the Quiz
-let time = .5;
-let quizTimeInMinutes = time * 60 * 60;
-let quizTime = quizTimeInMinutes / 60;
-
-let counting = document.getElementById("count-down");
-
-function beginTimer(){
-    let quizTimer = setInterval(function(){
-    if(quizTime <= 0) {
-        clearInterval(quizTimer);
-        showScores();
-        window.alert("Time's up, you lost ninja!")
-    } else {
-        quizTime--;
-        let sec = Math.floor(quizTime % 60);
-        let min = Math.floor(quizTime / 60) % 60;
-        counting.innerHTML = `TIME: ${min} : ${sec}`;   
-    }
-},1000);
+//logic for the questionnaire, used with prototypes
+function Test(knowledgeTest) {
+    this.grade = 0;
+    this.knowledgeTest = knowledgeTest;
+    this.testPlace = 0;
 }
 
-beginTimer();
+Test.prototype.getQuestionIndex = function() {
+    return this.knowledgeTest[this.testPlace];
+}
+
+Test.prototype.guess = function(answer) {
+    if(this.getQuestionIndex().isCorrectAnswer(answer)) {
+        this.grade++;
+    }
+
+    this.testPlace++;
+}
+
+Test.prototype.isEnded = function() {
+    return this.testPlace === this.knowledgeTest.length;
+}
+
+
+function Question(text, choices, answer) {
+    this.text = text;
+    this.choices = choices;
+    this.answer = answer;
+}
+
+Question.prototype.isCorrectAnswer = function(choice) {
+    return this.answer === choice;
+}
+//
+// for the questionnaire logic I got conceptual help from this video https://www.youtube.com/watch?v=bGQ9sIHZdlo all credit to original creator
+
+
+// This part shows the questions
+function showTestOption() {
+    if(quiz.isEnded()) {
+        showScores();
+    }
+    else {
+        
+        let questionElement = document.getElementById("question");
+        questionElement.innerHTML = quiz.getQuestionIndex().text;
+
+       
+        let choices = quiz.getQuestionIndex().choices;
+        for(let i = 0; i < choices.length; i++) {
+            let choiceElement = document.getElementById("choice" + i);
+            choiceElement.innerHTML = choices[i];
+            guess("btn" + i, choices[i]);
+        }
+
+        showProgress();
+    }
+};
+
+function guess(id, guess) {
+    let button = document.getElementById(id);
+    button.onclick = function() {
+        quiz.guess(guess);
+        showTestOption();
+    }
+};
+
+
+function showProgress() {
+    let currentQuestionNumber = quiz.testPlace + 1;
+    let ProgressElement = document.getElementById("progress");
+    ProgressElement.innerHTML = 
+    `Question ${currentQuestionNumber} of ${quiz.knowledgeTest.length}`;
+};
+
+function showScores() {
+    let quizEndHTML = 
+    `
+    <h1>Quiz Completed</h1>
+    <h2 id='grade'> Your ninja level is: ${quiz.grade} of ${quiz.knowledgeTest.length}</h2>
+    <div class="quiz-repeat">
+        <a href="index.html">Test your ninja javascript knowledge again?</a>
+    </div>
+    `;
+    let quizElement = document.getElementById("quiz");
+    quizElement.innerHTML = quizEndHTML;
+};
+
+// To figure out how to get the questions to generate I got help from this video https://www.youtube.com/watch?v=bGQ9sIHZdlo all credit to original creator
+//Originally I made a questionnaire out of prompts, however this froze the brower and timer so I had to start over :(
+
+
+
+
+
+
+
+let quiz = new Test(knowledgeTest);
+
+showTestOption();
+
+//I had to start over many times from scratch on the javascript part of this :(
