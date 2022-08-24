@@ -18,7 +18,7 @@ function ninjaClock(){
     let ninjaCountDown = setInterval(function(){
     if(testTotalTime <= 0) {
         clearInterval(ninjaCountDown);
-        showScores();
+        ninjaGrade2();
         window.alert("Time's up, you lost ninja!")
     } else {
         testTotalTime--;
@@ -62,7 +62,7 @@ let knowledgeTest = [
 
 
 
-//logic for the questionnaire, used with prototypes
+//logic for the questionnaire, used with prototypes, ties in with the functions towards the end of the page
 function Test(knowledgeTest) {
     this.grade = 0;
     this.knowledgeTest = knowledgeTest;
@@ -73,8 +73,8 @@ Test.prototype.getQuestionIndex = function() {
     return this.knowledgeTest[this.testPlace];
 }
 
-Test.prototype.guess = function(answer) {
-    if(this.getQuestionIndex().isCorrectAnswer(answer)) {
+Test.prototype.guess = function(usersChoice) {
+    if(this.getQuestionIndex().isCorrectAnswer(usersChoice)) {
         this.grade++;
     }
 
@@ -86,68 +86,69 @@ Test.prototype.isEnded = function() {
 }
 
 
-function Question(text, choices, answer) {
-    this.text = text;
-    this.choices = choices;
-    this.answer = answer;
+function Question(words, options, usersChoice) {
+    this.words = words;
+    this.options = options;
+    this.usersChoice = usersChoice;
 }
 
 Question.prototype.isCorrectAnswer = function(choice) {
-    return this.answer === choice;
+    return this.usersChoice === choice;
 }
 //
 // for the questionnaire logic I got conceptual help from this video https://www.youtube.com/watch?v=bGQ9sIHZdlo all credit to original creator
 
 
-// This part shows the questions
+// This part makes sure the questions show up on the page without (hopefully) breaking
 function showTestOption() {
-    if(quiz.isEnded()) {
-        showScores();
+
+    if(loop.isEnded()) {
+        ninjaGrade2();
     }
     else {
         
-        let questionElement = document.getElementById("question");
-        questionElement.innerHTML = quiz.getQuestionIndex().text;
+        let quizContent = document.getElementById("ninja-test");
+        quizContent.innerHTML = loop.getQuestionIndex().words;
 
        
-        let choices = quiz.getQuestionIndex().choices;
-        for(let i = 0; i < choices.length; i++) {
-            let choiceElement = document.getElementById("choice" + i);
-            choiceElement.innerHTML = choices[i];
-            guess("btn" + i, choices[i]);
+        let options = loop.getQuestionIndex().options;
+        for(let i = 0; i < options.length; i++) {
+            let shinobiAnswer = document.getElementById("choice" + i);
+            shinobiAnswer.innerHTML = options[i];
+            decide("btn" + i, options[i]);
         }
 
-        showProgress();
+        ninjaJourney();
     }
 };
 
-function guess(id, guess) {
-    let button = document.getElementById(id);
-    button.onclick = function() {
-        quiz.guess(guess);
+function decide(id, decide) {
+    let dial = document.getElementById(id);
+    dial.onclick = function() {
+        loop.guess(decide);
         showTestOption();
     }
 };
 
 
-function showProgress() {
-    let currentQuestionNumber = quiz.testPlace + 1;
-    let ProgressElement = document.getElementById("progress");
-    ProgressElement.innerHTML = 
-    `Question ${currentQuestionNumber} of ${quiz.knowledgeTest.length}`;
+function ninjaJourney() {
+    let answerProgress = loop.testPlace + 1;
+    let funTimes = document.getElementById("this-part");
+    funTimes.innerHTML = 
+    `Question ${answerProgress} of ${loop.knowledgeTest.length}`;
 };
 
-function showScores() {
-    let quizEndHTML = 
+function ninjaGrade2() {
+    let endMessage = 
     `
-    <h1>Quiz Completed</h1>
-    <h2 id='grade'> Your ninja level is: ${quiz.grade} of ${quiz.knowledgeTest.length}</h2>
-    <div class="quiz-repeat">
+    <h1>You did it!</h1>
+    <h2 id='grade'> Your ninja level is: ${loop.grade} of ${loop.knowledgeTest.length}</h2>
+    <div class="do-it-again?">
         <a href="index.html">Test your ninja javascript knowledge again?</a>
     </div>
     `;
-    let quizElement = document.getElementById("quiz");
-    quizElement.innerHTML = quizEndHTML;
+    let questionnaireFun = document.getElementById("quiz");
+    questionnaireFun.innerHTML = endMessage;
 };
 
 // To figure out how to get the questions to generate I got help from this video https://www.youtube.com/watch?v=bGQ9sIHZdlo all credit to original creator
@@ -159,8 +160,10 @@ function showScores() {
 
 
 
-let quiz = new Test(knowledgeTest);
+let loop = new Test(knowledgeTest);
 
 showTestOption();
 
 //I had to start over many times from scratch on the javascript part of this :(
+
+//I hope you liked my javascript quiz!!!! :)
