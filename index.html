@@ -12,15 +12,17 @@
     </head>
 
     <body>
+        
         <header><h1>Become a Javascript Ninja!!!</h1></header>
         <main>
-
-          <section>
-<!--experiment-->
+          
             <div class="big-box">
+              <img id="ninja-img" src="assets/image/ninja.jpeg" alt="Two ninjas fighting" 
+                  
+              
               <div class="questionnaire">
                   <div id="quiz">
-                      <h1>Ninja Javascript Challenge!</h1>
+                      <h2>Ninja Javascript Challenge!</h1>
                       <div class="top-part">
                           <p id="this-part">Question x of y </p>
                           <p id="timer-box"></p>
@@ -36,13 +38,14 @@
                     <!--For assistance on making interactive buttons that actually worked I used this video https://www.youtube.com/watch?v=bGQ9sIHZdlo all credit to original creator-->
                       <hr>
                       <footer>
-                          <p>Ninja Training</p>
+                          <p></p>
       
                       </footer>
                   </div>
               </div>
           </div>
-      
+        
+        
           <script src="assets/script.js"></script>
             
 
@@ -65,7 +68,7 @@
           </style>
 
             <div>
-              <h2>Ninja Scores🥷</h2>
+              <h3>Ninja Scores🥷</h2>
 
 
 
@@ -75,6 +78,7 @@
                     <input id ="enterStuff" type="text" placeholder="Enter ninja score...">
                     <button type="button" id="placeThing">Insert Ninja Data</button>
                 </fieldset>
+                
                 <fieldset>
                   <legend>Ninja Javascript Legends 🥷🥷</legend>
                     <div id="endResult"></div>
@@ -94,28 +98,34 @@
     <script src="assets/script.js"></script>
 <!--This is the high score and name local storage section-->
     <script type="text/javascript">
+
         const enterValue = document.getElementById("enterValue");
+
         const inValue = document.getElementById("enterStuff");
+
         const placeThing = document.getElementById("placeThing");
+
         const endResult = document.getElementById("endResult");
 
         placeThing.onclick = function () {
-          const key = enterValue.value;
-          const value = enterStuff.value;
+
+          const firstThing = enterValue.value;
+          const secondThing = enterStuff.value;
 
 
-          if (key && value) {
-            localStorage.setItem(key, value);
+          if (firstThing && secondThing) {
+            localStorage.setItem(firstThing, secondThing);
             location.reload();
 
           }
         };
 
         for (let i = 0; i < localStorage.length; i++){
-          const key = localStorage.key(i);
-          const value = localStorage.getItem(key);
+          const firstThing = localStorage.key(i);
 
-          endResult.innerHTML += `${key}: ${value}<br />`;
+          const secondThing = localStorage.getItem(firstThing);
+
+          endResult.innerHTML += `${firstThing}: ${secondThing}<br />`;
 
         }
         //I used this video for reference on local storage for my high scores: https://www.youtube.com/watch?v=k8yJCeuP6I8&list=LL&index=2

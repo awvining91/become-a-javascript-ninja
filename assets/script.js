@@ -50,7 +50,7 @@ let knowledgeTest = [
         ),
     new Question(
         "What type of language is Javascript?", 
-        ["up-stack", "no-stack", "side-end", "full-stack"], "full-stack"
+        ["up-stack", "no-stack", "side-stack", "full-stack"], "full-stack"
         ),
     new Question(
         "What language is frequently used with JavaScript?", 

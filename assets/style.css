@@ -4,19 +4,53 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
- 
+    color:rgba(46, 11, 62, 0.793);
     justify-content: center;
+    background-color: rgb(199, 202, 244);
 }
 
 body{
     background: #e2e4e6;
 }
 
-#generate{
+h1 {
 
+    color:rgb(198, 67, 11);
+}
 
+#timer-box {
+
+    border-width: 3px;
+    border-color: azure;
+    color: rgb(187, 9, 9);
+    font-weight: 400;
+}
+
+#ninja-img {
+
+    width: 33%;
+    height: 33%;
+}
+
+.btn {
+    color: purple;
+    border-color: rgb(219, 162, 19);
 
 }
+
+.buttons {
+
+    color: purple;
+    border-color: yellow;
+}
+
+#master-div {
+
+    justify-content: center;
+    flex-wrap: flex;
+
+}
+
 
 (
     justify-content: center;
